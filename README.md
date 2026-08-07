@@ -6,7 +6,7 @@ A single-page, mobile-first portfolio built with plain HTML, CSS, and JS (no fra
 - `index.html` — page structure and content
 - `style.css` — all styling (design tokens at the top of the file)
 - `script.js` — typed hero text, mobile nav toggle, scroll-reveal animation
-- `resume.pdf` — **placeholder** — replace with your real resume, same filename
+- `resume.pdf` — my resume 
 
 ## Before you publish
 1. Replace `resume.pdf` with your actual resume (keep the filename, or update the two `href="resume.pdf"` links in `index.html` if you rename it).
