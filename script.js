@@ -51,6 +51,49 @@ function typeLoop() {
 typeLoop();
 
 // ============================================
+// 3D tilt — hero illustration stack
+// ============================================
+const heroVisual = document.querySelector('.hero-visual');
+const heroStack = document.querySelector('.hero-stack');
+
+if (heroVisual && heroStack && !prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {
+  heroVisual.addEventListener('mousemove', (e) => {
+    const rect = heroVisual.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;   // 0 -> 1
+    const y = (e.clientY - rect.top) / rect.height;    // 0 -> 1
+    const rotateY = (x - 0.5) * 24;   // -12deg .. 12deg
+    const rotateX = (0.5 - y) * 20;   // -10deg .. 10deg
+    heroStack.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  heroVisual.addEventListener('mouseleave', () => {
+    heroStack.style.transform = 'rotateX(6deg) rotateY(-8deg)';
+  });
+}
+
+// ============================================
+// 3D tilt — project cards
+// ============================================
+const tiltCards = document.querySelectorAll('.project-card');
+
+if (!prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const rotateY = (x - 0.5) * 10;
+      const rotateX = (0.5 - y) * 8;
+      card.style.transform = `translateY(-4px) perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+
+// ============================================
 // Mobile nav toggle
 // ============================================
 const navToggle = document.querySelector('.nav-toggle');
