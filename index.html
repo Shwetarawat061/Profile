@@ -7,72 +7,115 @@
 <meta name="description" content="Portfolio of Shweta Rawat, AI/ML and full-stack developer building practical, human-centered software.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ============ NAV ============ -->
-<header class="nav">
-  <div class="nav-inner">
-    <a href="#top" class="logo">S.RAWAT<span class="cursor-blink">_</span></a>
-    <nav class="nav-links">
-      <a href="#projects">~/projects</a>
-      <a href="#about">~/about</a>
-      <a href="#skills">~/skills</a>
-      <a href="#contact">~/contact</a>
-    </nav>
-    <a href="resume.pdf" download class="btn btn-nav">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
-      Resume
-    </a>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+<!-- ============ BOOT / LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <span class="loader-logo">S.RAWAT<span class="cursor-blink">_</span></span>
+    <div class="loader-bar"><span class="loader-bar-fill" id="loaderFill"></span></div>
+    <span class="loader-pct" id="loaderPct">00%</span>
   </div>
+</div>
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<canvas id="bg-particles" aria-hidden="true"></canvas>
+<div class="noise-overlay" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="siteNav">
+<div class="nav-inner">
+<a href="#top" class="logo" data-magnetic>S.RAWAT<span class="cursor-blink">_</span></a>
+
+<nav class="nav-links">
+<a href="#projects" data-magnetic>~/projects</a>
+<a href="#journey" data-magnetic>~/journey</a>
+<a href="#about" data-magnetic>~/about</a>
+<a href="#skills" data-magnetic>~/skills</a>
+<a href="#contact" data-magnetic>~/contact</a>
+</nav>
+
+<a href="resume.pdf" download class="btn btn-nav" data-magnetic>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+Resume
+</a>
+
+<button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle">
+<span></span><span></span><span></span>
+</button>
+</div>
+<div class="nav-mobile" id="navMobile">
+<a href="#projects">~/projects</a>
+<a href="#journey">~/journey</a>
+<a href="#about">~/about</a>
+<a href="#skills">~/skills</a>
+<a href="#contact">~/contact</a>
+<a href="resume.pdf" download>~/resume</a>
+</div>
 </header>
 
 <main id="top">
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="hero">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <p class="eyebrow">// PORTFOLIO — BUILD 2026</p>
-        <h1 class="hero-title">
-          Shweta Rawat
-        </h1>
-        <p class="hero-typed">
-          <span id="typed-text"></span><span class="cursor-blink">_</span>
-        </p>
-        <p class="hero-sub">I build AI systems and interfaces that solve problems people actually have — from NLP models that read distress in text, to full-stack apps that book a train seat without a hitch.</p>
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
 
-        <div class="status-row">
-          <span class="status-chip">
-            <span class="dot"></span> OPEN_TO_WORK
-          </span>
-          <span class="env-var">LOCATION="Nashik, Maharashtra, IN"</span>
-          <span class="env-var">TZ="UTC+05:30"</span>
-        </div>
+<div class="aurora-bg" aria-hidden="true">
+  <span class="aurora a1"></span>
+  <span class="aurora a2"></span>
+  <span class="aurora a3"></span>
+</div>
+<div class="hero-3d" id="heroCanvasWrap" aria-hidden="true"></div>
+<div class="grid-floor" aria-hidden="true"></div>
 
-        <div class="cta-row">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-outline">Get in Touch</a>
-        </div>
-      </div>
+<div class="hero-grid">
+<div class="hero-content" data-reveal>
 
-      <div class="hero-visual">
-        <div class="hero-stack">
-          <div class="illustration-card">
-            <img src="assets/hero-illustration.png" alt="Illustration of Shweta coding at a laptop, surrounded by AI, Python and GitHub icons" class="illustration-img">
-          </div>
+<p class="eyebrow">// PORTFOLIO — BUILD 2026</p>
 
-          <div class="hero-panel">
-            <div class="panel-head">
-              <span class="panel-dot"></span><span class="panel-dot"></span><span class="panel-dot"></span>
-              <span class="panel-title">profile.json</span>
-            </div>
-            <pre class="panel-code"><code><span class="tok-brace">{</span>
+<h1 class="hero-title" id="heroTitle">
+Shweta Rawat
+</h1>
+
+<p class="hero-typed">
+<span id="typed-text"></span><span class="cursor-blink">_</span>
+</p>
+
+<p class="hero-sub">I build AI systems and interfaces that solve problems people actually have — from NLP models that read distress in text, to full-stack apps that book a train seat without a hitch.</p>
+
+<div class="status-row">
+<span class="status-chip">
+<span class="dot"></span> OPEN_TO_WORK
+</span>
+<span class="env-var">LOCATION="Nashik, Maharashtra, IN"</span>
+<span class="env-var">TZ="UTC+05:30"</span>
+</div>
+
+<div class="cta-row">
+<a href="#projects" class="btn btn-primary" data-magnetic><span>View Projects</span></a>
+<a href="#contact" class="btn btn-outline" data-magnetic><span>Get in Touch</span></a>
+</div>
+</div>
+
+<div class="hero-visual" data-reveal data-reveal-delay="1">
+<div class="hero-stack">
+
+<div class="illustration-card tilt-card" data-tilt data-tilt-strength="6">
+<div class="holo-sheen" aria-hidden="true"></div>
+<img src="assets/hero-illustration.png" alt="Illustration of Shweta coding at a laptop, surrounded by AI, Python and GitHub icons" class="illustration-img">
+</div>
+
+<div class="hero-panel tilt-card" data-tilt data-tilt-strength="8">
+<div class="holo-sheen" aria-hidden="true"></div>
+<div class="panel-head">
+<span class="panel-dot"></span><span class="panel-dot"></span><span class="panel-dot"></span>
+<span class="panel-title">profile.json</span>
+</div>
+<pre class="panel-code"><code><span class="tok-brace">{</span>
   <span class="tok-key">"role"</span>: <span class="tok-str">"AI/ML & Full-Stack Dev"</span>,
   <span class="tok-key">"stack"</span>: [<span class="tok-str">"Python"</span>, <span class="tok-str">"React"</span>, <span class="tok-str">"Flask"</span>],
   <span class="tok-key">"focus"</span>: <span class="tok-str">"NLP, applied ML"</span>,
@@ -80,163 +123,252 @@
   <span class="tok-key">"hackathons"</span>: <span class="tok-num">4</span>,
   <span class="tok-key">"status"</span>: <span class="tok-str">"shipping"</span>
 <span class="tok-brace">}</span></code></pre>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+</div>
 
-  <div class="trace-divider" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 H520 L560 4 H640 L680 20 H1200" /><circle cx="680" cy="20" r="4"/></svg></div>
+</div>
+</div>
 
-  <!-- ============ PROJECTS ============ -->
-  <section class="section" id="projects">
-    <div class="section-head">
-      <p class="eyebrow">// 01 — FEATURED PROJECTS</p>
-      <h2>Things I've shipped</h2>
-    </div>
+</div>
 
-    <div class="project-grid">
+<a href="#projects" class="scroll-cue" data-magnetic aria-hidden="true">
+  <span class="scroll-cue-line"></span>
+  <span class="scroll-cue-label">SCROLL</span>
+</a>
 
-      <article class="project-card">
-        <div class="project-index">P01</div>
-        <h3>MannSuraksha</h3>
-        <p class="project-role">AI Mental Wellness Companion</p>
-        <p class="project-label">PROBLEM</p>
-        <p class="project-text">Students often don't get support for emotional distress early enough for it to help.</p>
-        <p class="project-label">IMPACT</p>
-        <p class="project-text">Offline-capable NLP sentiment engine + responsive UI, built end-to-end at InnoThon 2025.</p>
-        <div class="tag-row">
-          <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">React</span>
-        </div>
-        <a href="https://github.com/Shwetarawat061/MannSuraksha_App" class="project-link" target="_blank" rel="noopener">View repo →</a>
-      </article>
+</section>
 
-      <article class="project-card">
-        <div class="project-index">P02</div>
-        <h3>FactCheckAI</h3>
-        <p class="project-role">Misinformation Detection Tool</p>
-        <p class="project-label">PROBLEM</p>
-        <p class="project-text">Misinformation spreads faster than manual fact-checking can keep up with.</p>
-        <p class="project-label">IMPACT</p>
-        <p class="project-text">AI-driven text analysis web app that scores news content for veracity signals.</p>
-        <div class="tag-row">
-          <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Web App</span>
-        </div>
-        <a href="https://github.com/shwetarawat061/FactCheckAI" class="project-link" target="_blank" rel="noopener">View repo →</a>
-      </article>
+<div class="trace-divider" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 H520 L560 4 H640 L680 20 H1200" /><circle cx="680" cy="20" r="4"/></svg></div>
 
-      <article class="project-card">
-        <div class="project-index">P03</div>
-        <h3>Railway Management System</h3>
-        <p class="project-role">Full-Stack Booking Platform</p>
-        <p class="project-label">PROBLEM</p>
-        <p class="project-text">Manual seat booking and PNR handling doesn't scale and breaks under load.</p>
-        <p class="project-label">IMPACT</p>
-        <p class="project-text">JWT auth, role-based access, real-time seat booking, PNR generation, REST APIs.</p>
-        <div class="tag-row">
-          <span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">Streamlit</span>
-        </div>
-        <a href="https://github.com/Shwetarawat061/railway-management-system" class="project-link" target="_blank" rel="noopener">View repo →</a>
-      </article>
+<!-- ============ PROJECTS ============ -->
+<section class="section" id="projects">
+<div class="section-head" data-reveal>
+<p class="eyebrow">// 01 — FEATURED PROJECTS</p>
+<h2>Things I've shipped</h2>
+</div>
 
-    </div>
+<div class="project-grid">
 
-    <a href="https://github.com/shwetarawat061?tab=repositories" class="all-repos-link" target="_blank" rel="noopener">See all repositories →</a>
-  </section>
+<article class="project-card tilt-card" data-tilt data-reveal>
+<div class="holo-sheen" aria-hidden="true"></div>
+<div class="project-index">P01</div>
+<h3>MannSuraksha</h3>
+<p class="project-role">AI Mental Wellness Companion</p>
+<p class="project-label">PROBLEM</p>
+<p class="project-text">Students often don't get support for emotional distress early enough for it to help.</p>
+<p class="project-label">IMPACT</p>
+<p class="project-text">Offline-capable NLP sentiment engine + responsive UI, built end-to-end at InnoThon 2025.</p>
+<div class="tag-row">
+<span class="tag">Python</span><span class="tag">NLP</span><span class="tag">React</span>
+</div>
+<a href="https://github.com/Shwetarawat061/MannSuraksha_App" class="project-link" target="_blank" rel="noopener" data-magnetic>View repo →</a>
+</article>
 
-  <div class="trace-divider trace-divider-alt" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 H360 L400 36 H480 L520 20 H1200" /><circle cx="520" cy="20" r="4"/></svg></div>
+<article class="project-card tilt-card" data-tilt data-reveal data-reveal-delay="1">
+<div class="holo-sheen" aria-hidden="true"></div>
+<div class="project-index">P02</div>
+<h3>FactCheckAI</h3>
+<p class="project-role">Misinformation Detection Tool</p>
+<p class="project-label">PROBLEM</p>
+<p class="project-text">Misinformation spreads faster than manual fact-checking can keep up with.</p>
+<p class="project-label">IMPACT</p>
+<p class="project-text">AI-driven text analysis web app that scores news content for veracity signals.</p>
+<div class="tag-row">
+<span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Web App</span>
+</div>
+<a href="https://github.com/shwetarawat061/FactCheckAI" class="project-link" target="_blank" rel="noopener" data-magnetic>View repo →</a>
+</article>
 
-  <!-- ============ ABOUT ============ -->
-  <section class="section section-about" id="about">
-    <div class="section-head">
-      <p class="eyebrow">// 02 — ABOUT</p>
-      <h2>Who's behind this</h2>
-    </div>
+<article class="project-card tilt-card" data-tilt data-reveal data-reveal-delay="2">
+<div class="holo-sheen" aria-hidden="true"></div>
+<div class="project-index">P03</div>
+<h3>Railway Management System</h3>
+<p class="project-role">Full-Stack Booking Platform</p>
+<p class="project-label">PROBLEM</p>
+<p class="project-text">Manual seat booking and PNR handling doesn't scale and breaks under load.</p>
+<p class="project-label">IMPACT</p>
+<p class="project-text">JWT auth, role-based access, real-time seat booking, PNR generation, REST APIs.</p>
+<div class="tag-row">
+<span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">Streamlit</span>
+</div>
+<a href="https://github.com/Shwetarawat061/railway-management-system" class="project-link" target="_blank" rel="noopener" data-magnetic>View repo →</a>
+</article>
 
-    <div class="about-block">
-      <span class="comment-mark">/*</span>
-      <p class="about-text">
-        I'm an AI/ML and full-stack developer who likes taking an idea from sketch to something people can actually use.<br>
-        My work sits at the intersection of applied NLP and clean, usable interfaces — mental wellness tools, misinformation detection, booking systems that don't break.<br>
-        I care more about whether something works for a real person than whether it looks impressive in a demo.<br>
-        Outside of code: competitive programming, hackathons, and volunteering with NSS.
-      </p>
-      <span class="comment-mark comment-mark-end">*/</span>
-    </div>
-  </section>
+</div>
 
-  <div class="trace-divider" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 H680 L720 4 H800 L840 20 H1200" /><circle cx="840" cy="20" r="4"/></svg></div>
+<a href="https://github.com/shwetarawat061?tab=repositories" class="all-repos-link" target="_blank" rel="noopener" data-magnetic>See all repositories →</a>
+</section>
 
-  <!-- ============ SKILLS ============ -->
-  <section class="section" id="skills">
-    <div class="section-head">
-      <p class="eyebrow">// 03 — SKILLS & TOOLS</p>
-      <h2>What I build with</h2>
-    </div>
+<div class="trace-divider trace-divider-alt" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 H360 L400 36 H480 L520 20 H1200" /><circle cx="520" cy="20" r="4"/></svg></div>
 
-    <div class="skills-table">
-      <div class="skills-row">
-        <div class="skills-cat">LANGUAGES</div>
-        <div class="skills-items">
-          <span class="tag">Python</span><span class="tag">Java</span><span class="tag">C++</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span>
-        </div>
-      </div>
-      <div class="skills-row">
-        <div class="skills-cat">FRONTEND</div>
-        <div class="skills-items">
-          <span class="tag">React</span><span class="tag">HTML5</span><span class="tag">CSS3</span>
-        </div>
-      </div>
-      <div class="skills-row">
-        <div class="skills-cat">BACKEND &amp; DATA</div>
-        <div class="skills-items">
-          <span class="tag">Node.js</span><span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">MongoDB</span>
-        </div>
-      </div>
-      <div class="skills-row">
-        <div class="skills-cat">TOOLS</div>
-        <div class="skills-items">
-          <span class="tag">Git</span><span class="tag">REST APIs</span><span class="tag">Streamlit</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- ============ JOURNEY / TIMELINE ============ -->
+<section class="section section-timeline" id="journey">
+<div class="section-head" data-reveal>
+<p class="eyebrow">// 02 — BUILD TIMELINE</p>
+<h2>How it's been shipped</h2>
+</div>
+
+<div class="timeline" id="timeline">
+<div class="timeline-track" aria-hidden="true"><span class="timeline-progress" id="timelineProgress"></span></div>
+
+<div class="timeline-item" data-reveal>
+<div class="timeline-node"><span></span></div>
+<div class="timeline-card tilt-card" data-tilt>
+<div class="holo-sheen" aria-hidden="true"></div>
+<p class="project-label">INNOTHON 2025</p>
+<h3>MannSuraksha shipped</h3>
+<p class="project-text">Built an offline-capable NLP sentiment engine end-to-end for an AI mental wellness companion.</p>
+</div>
+</div>
+
+<div class="timeline-item" data-reveal data-reveal-delay="1">
+<div class="timeline-node"><span></span></div>
+<div class="timeline-card tilt-card" data-tilt>
+<div class="holo-sheen" aria-hidden="true"></div>
+<p class="project-label">HACKATHONS</p>
+<h3>4 hackathons and counting</h3>
+<p class="project-text">Repeated reps on shipping under pressure — from idea to demo in a weekend, every time.</p>
+</div>
+</div>
+
+<div class="timeline-item" data-reveal data-reveal-delay="2">
+<div class="timeline-node"><span></span></div>
+<div class="timeline-card tilt-card" data-tilt>
+<div class="holo-sheen" aria-hidden="true"></div>
+<p class="project-label">APPLIED NLP</p>
+<h3>FactCheckAI &amp; misinformation scoring</h3>
+<p class="project-text">Took on a harder, messier problem — scoring news content for veracity signals with AI-driven text analysis.</p>
+</div>
+</div>
+
+<div class="timeline-item" data-reveal data-reveal-delay="3">
+<div class="timeline-node"><span></span></div>
+<div class="timeline-card tilt-card" data-tilt>
+<div class="holo-sheen" aria-hidden="true"></div>
+<p class="project-label">FULL-STACK AT SCALE</p>
+<h3>Railway Management System</h3>
+<p class="project-text">JWT auth, role-based access and real-time seat booking — proving the systems side, not just the AI side.</p>
+</div>
+</div>
+
+<div class="timeline-item" data-reveal data-reveal-delay="4">
+<div class="timeline-node"><span></span></div>
+<div class="timeline-card tilt-card" data-tilt>
+<div class="holo-sheen" aria-hidden="true"></div>
+<p class="project-label">RIGHT NOW</p>
+<h3>Shipping &amp; open to work</h3>
+<p class="project-text">GPA 9.86, actively building, and open to internships and collaborations in AI/ML and full-stack dev.</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<div class="trace-divider" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 H680 L720 4 H800 L840 20 H1200" /><circle cx="840" cy="20" r="4"/></svg></div>
+
+<!-- ============ ABOUT ============ -->
+<section class="section section-about" id="about">
+<div class="section-head" data-reveal>
+<p class="eyebrow">// 03 — ABOUT</p>
+<h2>Who's behind this</h2>
+</div>
+
+<div class="about-block tilt-card" data-tilt data-tilt-strength="3" data-reveal>
+<div class="holo-sheen" aria-hidden="true"></div>
+<span class="comment-mark">/*</span>
+<p class="about-text">
+I'm an AI/ML and full-stack developer who likes taking an idea from sketch to something people can actually use.<br>
+My work sits at the intersection of applied NLP and clean, usable interfaces — mental wellness tools, misinformation detection, booking systems that don't break.<br>
+I care more about whether something works for a real person than whether it looks impressive in a demo.<br>
+Outside of code: competitive programming, hackathons, and volunteering with NSS.
+</p>
+<span class="comment-mark comment-mark-end">*/</span>
+</div>
+</section>
+
+<div class="trace-divider" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 H680 L720 4 H800 L840 20 H1200" /><circle cx="840" cy="20" r="4"/></svg></div>
+
+<!-- ============ SKILLS ============ -->
+<section class="section" id="skills">
+<div class="section-head" data-reveal>
+<p class="eyebrow">// 04 — SKILLS &amp; TOOLS</p>
+<h2>What I build with</h2>
+</div>
+
+<div class="skills-table">
+
+<div class="skills-row tilt-card" data-tilt data-tilt-strength="2" data-reveal>
+<div class="skills-cat">LANGUAGES</div>
+<div class="skills-items">
+<span class="tag">Python</span><span class="tag">Java</span><span class="tag">C++</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span>
+</div>
+</div>
+
+<div class="skills-row tilt-card" data-tilt data-tilt-strength="2" data-reveal data-reveal-delay="1">
+<div class="skills-cat">FRONTEND</div>
+<div class="skills-items">
+<span class="tag">React</span><span class="tag">HTML5</span><span class="tag">CSS3</span>
+</div>
+</div>
+
+<div class="skills-row tilt-card" data-tilt data-tilt-strength="2" data-reveal data-reveal-delay="2">
+<div class="skills-cat">BACKEND &amp; DATA</div>
+<div class="skills-items">
+<span class="tag">Node.js</span><span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">MongoDB</span>
+</div>
+</div>
+
+<div class="skills-row tilt-card" data-tilt data-tilt-strength="2" data-reveal data-reveal-delay="3">
+<div class="skills-cat">TOOLS</div>
+<div class="skills-items">
+<span class="tag">Git</span><span class="tag">REST APIs</span><span class="tag">Streamlit</span>
+</div>
+</div>
+
+</div>
+</section>
 
 </main>
 
 <!-- ============ CONTACT FOOTER ============ -->
 <footer class="footer" id="contact">
-  <div class="footer-inner">
-    <p class="eyebrow eyebrow-inverted">// 04 — GET IN TOUCH</p>
-    <h2 class="footer-title">Let's build something.</h2>
-    <p class="footer-sub">Open to internships and collaborations in AI/ML and full-stack development.</p>
+<div class="aurora-bg aurora-bg-footer" aria-hidden="true">
+  <span class="aurora a1"></span>
+  <span class="aurora a2"></span>
+</div>
+<div class="footer-inner" data-reveal>
+<p class="eyebrow eyebrow-inverted">// 05 — GET IN TOUCH</p>
+<h2 class="footer-title">Let's build something.</h2>
+<p class="footer-sub">Open to internships and collaborations in AI/ML and full-stack development.</p>
 
-    <div class="footer-links">
-      <a href="mailto:shwetarawat6106@gmail.com" class="footer-link">
-        <span class="footer-link-label">EMAIL</span>
-        <span class="footer-link-value">shwetarawat6106@gmail.com ↗</span>
-      </a>
-      <a href="https://www.linkedin.com/in/shweta-rawat-01a71733a" target="_blank" rel="noopener" class="footer-link">
-        <span class="footer-link-label">LINKEDIN</span>
-        <span class="footer-link-value">/in/shweta-rawat ↗</span>
-      </a>
-      <a href="https://github.com/shwetarawat061" target="_blank" rel="noopener" class="footer-link">
-        <span class="footer-link-label">GITHUB</span>
-        <span class="footer-link-value">/shwetarawat061 ↗</span>
-      </a>
-      <a href="resume.pdf" download class="footer-link">
-        <span class="footer-link-label">RESUME</span>
-        <span class="footer-link-value">Download PDF ↓</span>
-      </a>
-    </div>
+<div class="footer-links">
+<a href="mailto:shwetarawat6106@gmail.com" class="footer-link" data-magnetic>
+<span class="footer-link-label">EMAIL</span>
+<span class="footer-link-value">shwetarawat6106@gmail.com ↗</span>
+</a>
+<a href="https://www.linkedin.com/in/shweta-rawat-01a71733a" target="_blank" rel="noopener" class="footer-link" data-magnetic>
+<span class="footer-link-label">LINKEDIN</span>
+<span class="footer-link-value">/in/shweta-rawat ↗</span>
+</a>
+<a href="https://github.com/shwetarawat061" target="_blank" rel="noopener" class="footer-link" data-magnetic>
+<span class="footer-link-label">GITHUB</span>
+<span class="footer-link-value">/shwetarawat061 ↗</span>
+</a>
+<a href="resume.pdf" download class="footer-link" data-magnetic>
+<span class="footer-link-label">RESUME</span>
+<span class="footer-link-value">Download PDF ↓</span>
+</a>
+</div>
 
-    <div class="footer-bottom">
-      <span>© 2026 Shweta Rawat</span>
-      <span>Built with HTML, CSS &amp; JS</span>
-    </div>
-  </div>
+<div class="footer-bottom">
+<span>© 2026 Shweta Rawat</span>
+<span>Built with HTML, CSS &amp; JS</span>
+</div>
+</div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
