@@ -1,6 +1,30 @@
 // ============================================
 // Typed hero line
 // ============================================
+const loader = document.getElementById('loader');
+const loaderFill = document.getElementById('loaderFill');
+const loaderPct = document.getElementById('loaderPct');
+
+if (loader && loaderFill && loaderPct) {
+  let progress = 0;
+  const tick = () => {
+    progress = Math.min(progress + 8, 100);
+    loaderFill.style.width = `${progress}%`;
+    loaderPct.textContent = `${String(progress).padStart(2, '0')}%`;
+
+    if (progress < 100) {
+      setTimeout(tick, 80);
+    } else {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        document.documentElement.style.overflow = 'auto';
+        document.body.style.overflow = 'auto';
+      }, 260);
+    }
+  };
+  tick();
+}
+
 const typedEl = document.getElementById('typed-text');
 const phrases = [
   'AI/ML Developer.',
